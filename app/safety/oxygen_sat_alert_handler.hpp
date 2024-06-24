@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+#include "../output/out_stream.hpp"
 #include "alert_handler.hpp"
 
 /**
@@ -11,7 +12,7 @@
  * The OxygenSaturationAlertHandler class checks if the oxygen saturation is out
  * of the specified range and raises an alert if it is.
  */
-class OxygenSaturationAlertHandler : public AlertHandler<int> {
+class OxygenSaturationAlertHandler : public AlertHandler {
  public:
   /**
    * @brief Constructs an OxygenSaturationAlertHandler with the specified range.
@@ -19,8 +20,10 @@ class OxygenSaturationAlertHandler : public AlertHandler<int> {
    * @param min_range The minimum acceptable oxygen saturation.
    * @param max_range The maximum acceptable oxygen saturation.
    */
-  OxygenSaturationAlertHandler(int min_range, int max_range);
+  OxygenSaturationAlertHandler(int min_range, int max_range,
+                               std::shared_ptr<Output> display);
 
+ protected:
   /**
    * @brief Handles the oxygen saturation alert.
    *
@@ -30,11 +33,12 @@ class OxygenSaturationAlertHandler : public AlertHandler<int> {
    *
    * @param oxygen_sat The oxygen saturation value.
    */
-  void Handle(int oxygen_sat) override;
+  bool HandleAlert(int oxygen_sat) override;
 
  private:
-  int min_range_; /**< Minimum acceptable oxygen saturation */
-  int max_range_; /**< Maximum acceptable oxygen saturation */
+  std::shared_ptr<Output> display_; /**< Output object for displaying alerts */
+  int min_range_;                   /**< Minimum acceptable oxygen saturation */
+  int max_range_;                   /**< Maximum acceptable oxygen saturation */
 };
 
 #endif  // OXYGEN_SATURATION_ALERT_HANDLER_H_

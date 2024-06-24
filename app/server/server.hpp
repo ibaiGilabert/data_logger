@@ -1,5 +1,5 @@
-#ifndef SERVER_HPP
-#define SERVER_HPP
+#ifndef SERVER_H_
+#define SERVER_H_
 
 #include <asio.hpp>
 #include <iostream>
@@ -16,6 +16,7 @@ class Server {
   Server(asio::io_context& context, unsigned short port);
   ~Server();
 
+  void SetDispatcher(std::shared_ptr<Dispatcher> dispatcher);
   void Start();
   void Stop();
 
@@ -30,6 +31,8 @@ class Server {
   std::queue<std::shared_ptr<Session>> sessions_;
   // Mutex for thread-safe access to sessions
   std::mutex sessions_mutex_;
+  // Dispatcher for business logic
+  std::shared_ptr<Dispatcher> dispatcher_;
 };
 
-#endif  // SERVER_HPP
+#endif  // SERVER_H_

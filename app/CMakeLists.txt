@@ -2,12 +2,16 @@
 file(GLOB HDR
     safety/*.hpp
     server/*.hpp
+    output/*.hpp
+    *.hpp
 )
 
 # Sources
 file(GLOB SRC
     safety/*.cpp
     server/*.cpp
+    output/*.cpp
+    *.cpp
 )
 
 add_executable(server ${HDR} ${SRC} main.cpp)

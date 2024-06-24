@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+#include "../output/out_stream.hpp"
 #include "alert_handler.hpp"
 
 /**
@@ -11,7 +12,7 @@
  * The HeartRateAlertHandler class checks if the heart rate is out of the
  * specified range and raises an alert if it is.
  */
-class HeartRateAlertHandler : public AlertHandler<int> {
+class HeartRateAlertHandler : public AlertHandler {
  public:
   /**
    * @brief Constructs a HeartRateAlertHandler with the specified range.
@@ -19,8 +20,10 @@ class HeartRateAlertHandler : public AlertHandler<int> {
    * @param min_range The minimum acceptable heart rate.
    * @param max_range The maximum acceptable heart rate.
    */
-  HeartRateAlertHandler(int min_range, int max_range);
+  HeartRateAlertHandler(int min_range, int max_range,
+                        std::shared_ptr<Output> display);
 
+ protected:
   /**
    * @brief Handles the heart rate alert.
    *
@@ -30,11 +33,12 @@ class HeartRateAlertHandler : public AlertHandler<int> {
    *
    * @param heart_rate The heart rate value.
    */
-  void Handle(int heart_rate) override;
+  bool HandleAlert(int heart_rate) override;
 
  private:
-  int min_range_; /**< Minimum acceptable heart rate */
-  int max_range_; /**< Maximum acceptable heart rate */
+  std::shared_ptr<Output> display_; /**< Output object for displaying alerts */
+  int min_range_;                   /**< Minimum acceptable heart rate */
+  int max_range_;                   /**< Maximum acceptable heart rate */
 };
 
 #endif  // HEART_RATE_ALERT_HANDLER_H_

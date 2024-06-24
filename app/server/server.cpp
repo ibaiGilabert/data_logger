@@ -8,6 +8,10 @@ Server::~Server() {
   Stop();
 }
 
+void Server::SetDispatcher(std::shared_ptr<Dispatcher> dispatcher) {
+  dispatcher_ = dispatcher;
+}
+
 void Server::Start() { AcceptConnection(); }
 
 void Server::Stop() {
@@ -39,7 +43,8 @@ void Server::HandleAccept(tcp::socket socket, const std::error_code& ec) {
   if (!ec) {
     try {
       // Create a new session and start it
-      auto newSession = std::make_shared<Session>(std::move(socket));
+      auto newSession =
+          std::make_shared<Session>(std::move(socket), dispatcher_);
       newSession->Start();
 
       // Add the session to the queue of active sessions

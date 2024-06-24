@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+#include "../output/out_stream.hpp"
 #include "alert_handler.hpp"
 
 /**
@@ -11,7 +12,7 @@
  * The TemperatureAlertHandler class checks if the temperature is out of the
  * specified range and raises an alert if it is.
  */
-class TemperatureAlertHandler : public AlertHandler<float> {
+class TemperatureAlertHandler : public AlertHandler {
  public:
   /**
    * @brief Constructs a TemperatureAlertHandler with the specified range.
@@ -19,8 +20,10 @@ class TemperatureAlertHandler : public AlertHandler<float> {
    * @param min_range The minimum acceptable temperature.
    * @param max_range The maximum acceptable temperature.
    */
-  TemperatureAlertHandler(float min_range, float max_range);
+  TemperatureAlertHandler(float min_range, float max_range,
+                          std::shared_ptr<Output> display);
 
+ protected:
   /**
    * @brief Handles the temperature alert.
    *
@@ -30,11 +33,12 @@ class TemperatureAlertHandler : public AlertHandler<float> {
    *
    * @param temp The temperature value.
    */
-  void Handle(float temp) override;
+  bool HandleAlert(float temp) override;
 
  private:
-  float min_range_; /**< Minimum acceptable temperature */
-  float max_range_; /**< Maximum acceptable temperature */
+  std::shared_ptr<Output> display_; /**< Output object for displaying alerts */
+  float min_range_;                 /**< Minimum acceptable temperature */
+  float max_range_;                 /**< Maximum acceptable temperature */
 };
 
 #endif  // TEMPERATURE_ALERT_HANDLER_H_

@@ -1,13 +1,17 @@
 #include "heart_rate_alert_handler.hpp"
 
-HeartRateAlertHandler::HeartRateAlertHandler(int min_range, int max_range)
-    : min_range_(min_range), max_range_(max_range) {}
+HeartRateAlertHandler::HeartRateAlertHandler(int min_range, int max_range,
+                                             std::shared_ptr<Output> display)
+    : display_(display), min_range_(min_range), max_range_(max_range) {}
 
-void HeartRateAlertHandler::Handle(int heart_rate) {
+bool HeartRateAlertHandler::HandleAlert(int heart_rate) {
   if (heart_rate < min_range_ || heart_rate > max_range_) {
-    std::cout << "Alert: Heart rate out of range!" << std::endl;
+    std::stringstream stream;
+    stream << "Alert: Heart rate out of range! (" << heart_rate << ") range: ["
+           << min_range_ << ", " << max_range_ << "]";
+    // Display error
+    display_->Write(TraceFormatter::Format(stream.str()));
+    return false;
   }
-  if (next_) {
-    next_->Handle(heart_rate);
-  }
+  return true;
 }

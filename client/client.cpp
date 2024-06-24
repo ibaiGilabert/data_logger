@@ -45,7 +45,7 @@ void Client::SendData() {
   try {
     auto data = GenerateRandomData();
 
-    /**/
+    // Print values for debug purposes
     std::cout << "Sensor Data:" << std::endl;
     if (data.temp.has_value()) {
       std::cout << "Temperature: " << data.temp.value() << "C" << std::endl;
@@ -64,7 +64,6 @@ void Client::SendData() {
     } else {
       std::cout << "Heart Rate: Not Available" << std::endl;
     }
-    /**/
 
     // Serialize SensorData into buffer
     std::vector<char> sendBuffer(sizeof(SensorData));
@@ -98,12 +97,12 @@ SensorData Client::GenerateRandomData() {
   std::random_device rd;
   std::mt19937 gen(rd());
 
-  // Temperature between 25.0 and 50.0
-  std::uniform_real_distribution<float> temp_dist(25.0f, 50.0f);
-  // Oxygen saturation between 50 and 150
-  std::uniform_int_distribution<int> oxygen_dist(50, 150);
-  // Heart rate between 30 and 200
-  std::uniform_int_distribution<int> heart_rate_dist(30, 200);
+  // Generate random temperature values
+  std::uniform_real_distribution<float> temp_dist(30.0f, 50.0f);
+  // Generate random heart rate values
+  std::uniform_int_distribution<int> heart_rate_dist(50, 200);
+  // Generate random Oxygen saturation values
+  std::uniform_int_distribution<int> oxygen_dist(90, 110);
 
   // Generate random values and decide if optional should be populated
   std::uniform_int_distribution<int> bool_dist(0, 1);
