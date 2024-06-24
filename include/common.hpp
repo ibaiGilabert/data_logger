@@ -6,8 +6,8 @@
 // Define a common struct for data exchange
 struct SensorData {
   std::optional<float> temp;
-  std::optional<int> heartRate;
-  std::optional<int> oxygenSaturation;
+  std::optional<int> heart_rate;
+  std::optional<int> oxygen_saturation;
 };
 
 #endif  // COMMON_HPP

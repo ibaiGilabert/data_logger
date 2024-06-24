@@ -52,14 +52,14 @@ void Client::SendData() {
     } else {
       std::cout << "Temperature: Not Available" << std::endl;
     }
-    if (data.oxygenSaturation.has_value()) {
-      std::cout << "Oxygen Saturation: " << data.oxygenSaturation.value() << "%"
-                << std::endl;
+    if (data.oxygen_saturation.has_value()) {
+      std::cout << "Oxygen Saturation: " << data.oxygen_saturation.value()
+                << "%" << std::endl;
     } else {
       std::cout << "Oxygen Saturation: Not Available" << std::endl;
     }
-    if (data.heartRate.has_value()) {
-      std::cout << "Heart Rate: " << data.heartRate.value() << "bpm"
+    if (data.heart_rate.has_value()) {
+      std::cout << "Heart Rate: " << data.heart_rate.value() << "bpm"
                 << std::endl;
     } else {
       std::cout << "Heart Rate: Not Available" << std::endl;
@@ -111,10 +111,10 @@ SensorData Client::GenerateRandomData() {
     randomData.temp = temp_dist(gen);
   }
   if (bool_dist(gen) == 1) {
-    randomData.oxygenSaturation = oxygen_dist(gen);
+    randomData.oxygen_saturation = oxygen_dist(gen);
   }
   if (bool_dist(gen) == 1) {
-    randomData.heartRate = heart_rate_dist(gen);
+    randomData.heart_rate = heart_rate_dist(gen);
   }
 
   return randomData;

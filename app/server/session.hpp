@@ -25,7 +25,7 @@ class Session : public std::enable_shared_from_this<Session> {
   static constexpr std::chrono::seconds kProcessDelay{1};
 
   tcp::socket socket_;
-  std::array<char, sizeof(SensorData)> recvBuffer_;
+  std::array<char, sizeof(SensorData)> recv_buffer_;
 };
 
 #endif  // SESSION_HPP

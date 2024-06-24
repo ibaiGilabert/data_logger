@@ -30,18 +30,19 @@ void Session::ReadData() {
 
   // Buffer to hold received data
   asio::async_read(
-      socket_, asio::buffer(recvBuffer_),
+      socket_, asio::buffer(recv_buffer_),
       [this, self](std::error_code ec, std::size_t length) {
         if (!ec) {
           try {
             std::cout << "Data read: " << length << " bytes." << std::endl;
 
             // Deserialize received data into SensorData struct
-            SensorData receivedData;
-            std::memcpy(&receivedData, recvBuffer_.data(), sizeof(SensorData));
+            SensorData received_data;
+            std::memcpy(&received_data, recv_buffer_.data(),
+                        sizeof(SensorData));
 
             // Print or log received data
-            ProcessData(receivedData);
+            ProcessData(received_data);
 
             // Continue reading data
             ReadData();
@@ -68,14 +69,14 @@ void Session::ProcessData(const SensorData& data) {
   } else {
     std::cout << "Temperature: Not Available" << std::endl;
   }
-  if (data.oxygenSaturation.has_value()) {
-    std::cout << "Oxygen Saturation: " << data.oxygenSaturation.value() << "%"
+  if (data.oxygen_saturation.has_value()) {
+    std::cout << "Oxygen Saturation: " << data.oxygen_saturation.value() << "%"
               << std::endl;
   } else {
     std::cout << "Oxygen Saturation: Not Available" << std::endl;
   }
-  if (data.heartRate.has_value()) {
-    std::cout << "Heart Rate: " << data.heartRate.value() << " bpm"
+  if (data.heart_rate.has_value()) {
+    std::cout << "Heart Rate: " << data.heart_rate.value() << " bpm"
               << std::endl;
   } else {
     std::cout << "Heart Rate: Not Available" << std::endl;

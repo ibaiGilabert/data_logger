@@ -1,7 +1,7 @@
 #include <asio.hpp>
 #include <iostream>
 
-#include "Client.hpp"
+#include "client.hpp"
 
 int main(int argc, char* argv[]) {
   try {

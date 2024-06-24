@@ -12,7 +12,7 @@ void Server::Start() { AcceptConnection(); }
 
 void Server::Stop() {
   // Close all active sessions
-  std::lock_guard<std::mutex> lock(sessionsMutex_);
+  std::lock_guard<std::mutex> lock(sessions_mutex_);
   while (!sessions_.empty()) {
     auto session = sessions_.front();
     session->Close();
@@ -44,7 +44,7 @@ void Server::HandleAccept(tcp::socket socket, const std::error_code& ec) {
 
       // Add the session to the queue of active sessions
       {
-        std::lock_guard<std::mutex> lock(sessionsMutex_);
+        std::lock_guard<std::mutex> lock(sessions_mutex_);
         sessions_.push(newSession);
       }
     } catch (const std::exception& e) {

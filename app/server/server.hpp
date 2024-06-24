@@ -29,7 +29,7 @@ class Server {
   // Track active sessions
   std::queue<std::shared_ptr<Session>> sessions_;
   // Mutex for thread-safe access to sessions
-  std::mutex sessionsMutex_;
+  std::mutex sessions_mutex_;
 };
 
 #endif  // SERVER_HPP
