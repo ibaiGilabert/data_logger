@@ -3,9 +3,9 @@
 
 #include "output/out_stream_file.hpp"
 #include "output/out_stream_terminal.hpp"
-#include "safety/heart_rate_alert_handler.hpp"
-#include "safety/oxygen_sat_alert_handler.hpp"
-#include "safety/temp_alert_handler.hpp"
+#include "safety/alert_handler_heart_rate.hpp"
+#include "safety/alert_handler_oxygen_sat.hpp"
+#include "safety/alert_handler_temp.hpp"
 #include "safety_mgr.hpp"
 #include "server/server.hpp"
 

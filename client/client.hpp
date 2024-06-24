@@ -27,7 +27,7 @@ class Client {
   // Timeout duration for receiveAck()
   static constexpr std::chrono::seconds kReceiveTimeout{5};
   // Delay duration for sendData()
-  static constexpr std::chrono::seconds kSendRate{3};
+  static constexpr std::chrono::seconds kSendRate{1};
 
   tcp::resolver::results_type endpoints_;
   tcp::resolver resolver_;

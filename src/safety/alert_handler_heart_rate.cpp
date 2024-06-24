@@ -1,4 +1,4 @@
-#include "heart_rate_alert_handler.hpp"
+#include "alert_handler_heart_rate.hpp"
 
 HeartRateAlertHandler::HeartRateAlertHandler(int min_range, int max_range,
                                              std::shared_ptr<Output> display)

@@ -10,5 +10,5 @@ set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 set(ASIO_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/lib/asio-1-29-0/asio/include)
 
 # Add subdirectories
-add_subdirectory(app)
+add_subdirectory(src)
 add_subdirectory(client)

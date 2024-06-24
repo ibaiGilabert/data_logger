@@ -1,4 +1,4 @@
-#include "temp_alert_handler.hpp"
+#include "alert_handler_temp.hpp"
 
 TemperatureAlertHandler::TemperatureAlertHandler(
     float min_range, float max_range, std::shared_ptr<Output> display)

@@ -1,4 +1,4 @@
-#include "oxygen_sat_alert_handler.hpp"
+#include "alert_handler_oxygen_sat.hpp"
 
 OxygenSaturationAlertHandler::OxygenSaturationAlertHandler(
     int min_range, int max_range, std::shared_ptr<Output> display)
